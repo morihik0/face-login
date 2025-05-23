@@ -158,3 +158,52 @@ def validate_face_image(image):
     
     logger.info("Image validation successful")
     return True, "Image is valid for face recognition"
+
+def extract_face_encoding(image):
+    """
+    Extract face encoding from an image.
+    
+    Args:
+        image (numpy.ndarray): OpenCV format image data
+        
+    Returns:
+        numpy.ndarray: Face encoding (128-dimensional feature vector)
+        
+    Raises:
+        ValueError: If the image data is invalid
+        FaceDetectionError: If no faces are detected in the image
+        MultipleFacesError: If multiple faces are detected in the image
+    """
+    if image is None or not isinstance(image, np.ndarray):
+        logger.error("Invalid image data provided")
+        raise ValueError("Invalid image data provided")
+    
+    # Validate the image first
+    is_valid, message = validate_face_image(image)
+    if not is_valid:
+        logger.error(f"Invalid image for face encoding: {message}")
+        if "No face detected" in message:
+            raise FaceDetectionError(message)
+        elif "Multiple faces detected" in message:
+            raise MultipleFacesError(message)
+        else:
+            raise ValueError(f"Invalid image: {message}")
+    
+    # Convert BGR to RGB (face_recognition uses RGB)
+    if len(image.shape) == 3 and image.shape[2] == 3:
+        rgb_image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+    else:
+        rgb_image = image
+    
+    # Detect face location
+    face_locations = face_recognition.face_locations(rgb_image)
+    
+    # Extract face encoding
+    face_encodings = face_recognition.face_encodings(rgb_image, face_locations)
+    
+    if not face_encodings:
+        logger.error("Failed to extract face encoding")
+        raise FaceDetectionError("Failed to extract face encoding")
+    
+    logger.info("Face encoding extracted successfully")
+    return face_encodings[0]

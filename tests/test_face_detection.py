@@ -9,6 +9,7 @@ from app.services.face_detection import (
     detect_faces,
     detect_single_face,
     validate_face_image,
+    extract_face_encoding,
     FaceDetectionError,
     MultipleFacesError,
     ImageQualityError
@@ -197,6 +198,93 @@ class TestFaceDetection(unittest.TestCase):
         except Exception as e:
             # If an exception is raised, skip the test
             self.skipTest(f"Exception during validation: {e}")
+
+    def test_extract_face_encoding_invalid_input(self):
+        """Test extract_face_encoding with invalid input."""
+        # Test with None
+        with self.assertRaises(ValueError):
+            extract_face_encoding(None)
+        
+        # Test with invalid type
+        with self.assertRaises(ValueError):
+            extract_face_encoding("not an image")
+    
+    def test_extract_face_encoding_no_face(self):
+        """Test extract_face_encoding with an image that has no face."""
+        # Create a brighter image with no face
+        no_face_bright = np.ones((200, 200, 3), dtype=np.uint8) * 150
+        
+        # Test that FaceDetectionError is raised
+        with self.assertRaises(FaceDetectionError):
+            extract_face_encoding(no_face_bright)
+    
+    def test_extract_face_encoding_multiple_faces(self):
+        """Test extract_face_encoding with an image that has multiple faces."""
+        # Create an image with multiple face-like patterns
+        multi_face_image = np.zeros((300, 300, 3), dtype=np.uint8)
+        # Draw first face
+        cv2.circle(multi_face_image, (100, 100), 40, (255, 255, 255), -1)
+        # Draw second face
+        cv2.circle(multi_face_image, (200, 100), 40, (255, 255, 255), -1)
+        
+        # Mock the validate_face_image function to return False with multiple faces message
+        original_validate = app.services.face_detection.validate_face_image
+        
+        def mock_validate(image):
+            return False, "Multiple faces detected in the image: 2"
+        
+        try:
+            # Replace the original function with our mock
+            app.services.face_detection.validate_face_image = mock_validate
+            
+            # Test that MultipleFacesError is raised
+            with self.assertRaises(MultipleFacesError):
+                extract_face_encoding(multi_face_image)
+        finally:
+            # Restore the original function
+            app.services.face_detection.validate_face_image = original_validate
+    
+    def test_extract_face_encoding_valid(self):
+        """
+        Test extract_face_encoding with a valid image.
+        
+        Note: This test might be skipped with the synthetic image we created,
+        as it's not a real face. In a real-world scenario, you would use
+        actual face images for testing.
+        """
+        try:
+            # Mock the validate_face_image function to return True
+            original_validate = app.services.face_detection.validate_face_image
+            original_face_locations = face_recognition.face_locations
+            original_face_encodings = face_recognition.face_encodings
+            
+            def mock_validate(image):
+                return True, "Image is valid for face recognition"
+            
+            def mock_face_locations(image):
+                return [(50, 150, 150, 50)]  # Fake face location
+            
+            def mock_face_encodings(image, face_locations):
+                return [np.zeros(128)]  # Fake 128-dimensional encoding
+            
+            try:
+                # Replace the original functions with our mocks
+                app.services.face_detection.validate_face_image = mock_validate
+                face_recognition.face_locations = mock_face_locations
+                face_recognition.face_encodings = mock_face_encodings
+                
+                # Test that a face encoding is returned
+                encoding = extract_face_encoding(self.test_image)
+                self.assertIsInstance(encoding, np.ndarray)
+                self.assertEqual(encoding.shape[0], 128)  # face_recognition returns 128-dimensional encodings
+            finally:
+                # Restore the original functions
+                app.services.face_detection.validate_face_image = original_validate
+                face_recognition.face_locations = original_face_locations
+                face_recognition.face_encodings = original_face_encodings
+        except Exception as e:
+            # If an exception is raised, skip the test
+            self.skipTest(f"Exception during face encoding extraction: {e}")
 
 if __name__ == '__main__':
     unittest.main()

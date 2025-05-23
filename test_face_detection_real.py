@@ -9,6 +9,7 @@ from app.services.face_detection import (
     detect_faces,
     detect_single_face,
     validate_face_image,
+    extract_face_encoding,
     FaceDetectionError,
     MultipleFacesError
 )
@@ -171,6 +172,24 @@ def main():
     dark_image = cv2.convertScaleAbs(single_face_image, alpha=0.2, beta=0)
     is_valid, message = validate_face_image(dark_image)
     print(f"Validation result: {is_valid}, Message: {message}")
+    
+    # Test extract_face_encoding with single face image
+    print("\nTesting extract_face_encoding with single face image...")
+    try:
+        encoding = extract_face_encoding(single_face_image)
+        print(f"Face encoding extracted successfully. Shape: {encoding.shape}")
+        print(f"First 10 values: {encoding[:10]}")
+    except Exception as e:
+        print(f"Error extracting face encoding: {e}")
+    
+    # Test extract_face_encoding with multiple faces image
+    print("\nTesting extract_face_encoding with multiple faces image...")
+    try:
+        encoding = extract_face_encoding(multi_face_image)
+        print(f"Face encoding extracted successfully. Shape: {encoding.shape}")
+        print(f"First 10 values: {encoding[:10]}")
+    except Exception as e:
+        print(f"Error extracting face encoding: {e}")
 
 if __name__ == "__main__":
     main()
