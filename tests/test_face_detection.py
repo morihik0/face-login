@@ -4,8 +4,10 @@ Tests for the face detection service.
 import unittest
 import cv2
 import numpy as np
+import app.services.face_detection
 from app.services.face_detection import (
     detect_faces,
+    detect_single_face,
     FaceDetectionError,
     MultipleFacesError,
     ImageQualityError
@@ -71,6 +73,46 @@ class TestFaceDetection(unittest.TestCase):
             # This is the expected outcome with our synthetic image
             # We'll skip this test in this case
             self.skipTest("No face detected in synthetic image, which is expected")
+    
+    def test_detect_single_face(self):
+        """Test detect_single_face with an image that has a single face."""
+        try:
+            face_location = detect_single_face(self.test_image)
+            # If we get here, the function detected a face in our synthetic image
+            self.assertIsInstance(face_location, tuple)
+            self.assertEqual(len(face_location), 4)  # (top, right, bottom, left)
+        except FaceDetectionError:
+            # This is the expected outcome with our synthetic image
+            self.skipTest("No face detected in synthetic image, which is expected")
+    
+    def test_detect_single_face_multiple_faces(self):
+        """Test detect_single_face with an image that has multiple faces."""
+        # Create an image with multiple face-like patterns
+        multi_face_image = np.zeros((300, 300, 3), dtype=np.uint8)
+        # Draw first face
+        cv2.circle(multi_face_image, (100, 100), 40, (255, 255, 255), -1)
+        # Draw second face
+        cv2.circle(multi_face_image, (200, 100), 40, (255, 255, 255), -1)
+        
+        # Save the test image for debugging
+        cv2.imwrite('tests/test_images/multi_face.jpg', multi_face_image)
+        
+        # Mock the detect_faces function to return multiple face locations
+        original_detect_faces = app.services.face_detection.detect_faces
+        
+        def mock_detect_faces(image):
+            return [(10, 50, 50, 10), (60, 100, 100, 60)]
+        
+        try:
+            # Replace the original function with our mock
+            app.services.face_detection.detect_faces = mock_detect_faces
+            
+            # Test that MultipleFacesError is raised
+            with self.assertRaises(MultipleFacesError):
+                detect_single_face(multi_face_image)
+        finally:
+            # Restore the original function
+            app.services.face_detection.detect_faces = original_detect_faces
 
 if __name__ == '__main__':
     unittest.main()

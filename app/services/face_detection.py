@@ -57,3 +57,29 @@ def detect_faces(image):
     
     logger.info(f"Detected {len(face_locations)} faces in the image")
     return face_locations
+
+def detect_single_face(image):
+    """
+    Detect a single face in an image.
+    
+    Args:
+        image (numpy.ndarray): OpenCV format image data
+        
+    Returns:
+        tuple: Face location in (top, right, bottom, left) format
+        
+    Raises:
+        ValueError: If the image data is invalid
+        FaceDetectionError: If no faces are detected in the image
+        MultipleFacesError: If multiple faces are detected in the image
+    """
+    # Detect all faces in the image
+    face_locations = detect_faces(image)
+    
+    # Check if multiple faces are detected
+    if len(face_locations) > 1:
+        logger.warning(f"Multiple faces detected in the image: {len(face_locations)}")
+        raise MultipleFacesError(f"Multiple faces detected in the image: {len(face_locations)}")
+    
+    # Return the single face location
+    return face_locations[0]
