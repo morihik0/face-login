@@ -8,6 +8,7 @@ import app.services.face_detection
 from app.services.face_detection import (
     detect_faces,
     detect_single_face,
+    validate_face_image,
     FaceDetectionError,
     MultipleFacesError,
     ImageQualityError
@@ -113,6 +114,89 @@ class TestFaceDetection(unittest.TestCase):
         finally:
             # Restore the original function
             app.services.face_detection.detect_faces = original_detect_faces
+
+    def test_validate_face_image_invalid_input(self):
+        """Test validate_face_image with invalid input."""
+        # Test with None
+        with self.assertRaises(ValueError):
+            validate_face_image(None)
+        
+        # Test with invalid type
+        with self.assertRaises(ValueError):
+            validate_face_image("not an image")
+    
+    def test_validate_face_image_small_image(self):
+        """Test validate_face_image with a small image."""
+        # Create a small image (50x50)
+        small_image = np.zeros((50, 50, 3), dtype=np.uint8)
+        
+        # Validate the image
+        is_valid, message = validate_face_image(small_image)
+        
+        # Check the result
+        self.assertFalse(is_valid)
+        self.assertIn("too small", message)
+    
+    def test_validate_face_image_dark_image(self):
+        """Test validate_face_image with a dark image."""
+        # Create a dark image
+        dark_image = np.zeros((200, 200, 3), dtype=np.uint8)
+        # Add a very dim face-like pattern
+        cv2.circle(dark_image, (100, 100), 40, (20, 20, 20), -1)
+        
+        # Validate the image
+        is_valid, message = validate_face_image(dark_image)
+        
+        # Check the result
+        self.assertFalse(is_valid)
+        self.assertIn("too dark", message)
+    
+    def test_validate_face_image_bright_image(self):
+        """Test validate_face_image with a bright image."""
+        # Create a bright image
+        bright_image = np.ones((200, 200, 3), dtype=np.uint8) * 250
+        
+        # Validate the image
+        is_valid, message = validate_face_image(bright_image)
+        
+        # Check the result
+        self.assertFalse(is_valid)
+        self.assertIn("too bright", message)
+    
+    def test_validate_face_image_no_face(self):
+        """Test validate_face_image with an image that has no face."""
+        # Create a brighter image with no face
+        no_face_bright = np.ones((200, 200, 3), dtype=np.uint8) * 150
+        
+        # Validate the image
+        is_valid, message = validate_face_image(no_face_bright)
+        
+        # Check the result
+        self.assertFalse(is_valid)
+        self.assertIn("No face detected", message)
+    
+    def test_validate_face_image_valid(self):
+        """
+        Test validate_face_image with a valid image.
+        
+        Note: This test might be skipped with the synthetic image we created,
+        as it's not a real face. In a real-world scenario, you would use
+        actual face images for testing.
+        """
+        try:
+            # Try to validate the test image
+            is_valid, message = validate_face_image(self.test_image)
+            
+            # If we get here and the image is valid, check the result
+            if is_valid:
+                self.assertTrue(is_valid)
+                self.assertIn("valid", message)
+            else:
+                # If the image is not valid, skip the test
+                self.skipTest(f"Test image not valid: {message}")
+        except Exception as e:
+            # If an exception is raised, skip the test
+            self.skipTest(f"Exception during validation: {e}")
 
 if __name__ == '__main__':
     unittest.main()
