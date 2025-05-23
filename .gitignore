@@ -75,3 +75,6 @@ htmlcov/
 *.db
 *.sqlite
 *.sqlite3
+
+# Test images
+tests/test_images/
