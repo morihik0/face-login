@@ -36,14 +36,14 @@
 
 ### 4. 顔認識サービス実装 (2025-05-30 ~ 2025-06-01)
 
-- [ ] 4.1. `get_user_encodings(user_id)` 関数の実装
-- [ ] 4.2. `compare_faces(known_encodings, face_encoding)` 関数の実装
-- [ ] 4.3. 認証閾値の設定と調整機能の実装
-- [ ] 4.4. `register_face(user_id, image)` 関数の実装
-- [ ] 4.5. 最大登録可能顔数の制限実装
-- [ ] 4.6. `authenticate_face(image)` 関数の実装
-- [ ] 4.7. 認証結果のログ記録機能の実装
-- [ ] 4.8. 顔認識サービスのユニットテスト作成
+- [x] 4.1. `get_user_encodings(user_id)` 関数の実装
+- [x] 4.2. `compare_faces(known_encodings, face_encoding)` 関数の実装
+- [x] 4.3. 認証閾値の設定と調整機能の実装
+- [x] 4.4. `register_face(user_id, image)` 関数の実装
+- [x] 4.5. 最大登録可能顔数の制限実装
+- [x] 4.6. `authenticate_face(image)` 関数の実装
+- [x] 4.7. 認証結果のログ記録機能の実装
+- [x] 4.8. 顔認識サービスのユニットテスト作成
 
 ### 5. 顔検出・認識精度テスト (2025-06-02 ~ 2025-06-03)
 
