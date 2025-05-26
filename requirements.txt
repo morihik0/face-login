@@ -11,3 +11,5 @@ numpy==1.24.3
 
 # Testing dependencies
 pytest==7.4.0
+pandas==2.0.3
+tabulate==0.9.0

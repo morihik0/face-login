@@ -1,0 +1,53 @@
+category,image,detection_success,face_count,detection_error,detection_time_ms,validation_valid,validation_message
+base,single_face_test.jpg,True,1,,114.32886123657227,True,Image is valid for face recognition
+base,multi_face_test.jpg,True,6,,213.27900886535645,False,Multiple faces detected in the image: 6
+base,test_face.jpg,True,1,,21.493196487426758,False,Image is too dark (brightness: 28.68)
+base,no_face.jpg,False,0,No faces detected in the image,19.639015197753906,False,Image is too dark (brightness: 0.00)
+brightness,multi_face_test_dark.jpg,True,6,,211.08102798461914,False,Multiple faces detected in the image: 6
+brightness,single_face_test_bright.jpg,True,1,,125.08916854858398,False,Image is too bright (brightness: 200.11)
+brightness,multi_face_test_normal.jpg,True,6,,212.52918243408203,False,Multiple faces detected in the image: 6
+brightness,multi_face_test_bright.jpg,True,6,,211.25483512878418,False,Multiple faces detected in the image: 6
+brightness,single_face_test_normal.jpg,True,1,,173.03800582885742,True,Image is valid for face recognition
+brightness,single_face_test_dark.jpg,True,1,,104.52890396118164,True,Image is valid for face recognition
+sizes,multi_face_test_large.jpg,True,6,,478.1479835510254,False,Multiple faces detected in the image: 6
+sizes,multi_face_test_small.jpg,True,6,,57.27815628051758,False,Multiple faces detected in the image: 6
+sizes,single_face_test_small.jpg,True,1,,26.417970657348633,True,Image is valid for face recognition
+sizes,single_face_test_large.jpg,True,1,,235.02326011657715,True,Image is valid for face recognition
+quality,single_face_test_low_quality.jpg,True,1,,111.4799976348877,True,Image is valid for face recognition
+quality,multi_face_test_high_quality.jpg,True,6,,233.54315757751465,False,Multiple faces detected in the image: 6
+quality,multi_face_test_low_quality.jpg,True,6,,218.48511695861816,False,Multiple faces detected in the image: 6
+quality,single_face_test_high_quality.jpg,True,1,,106.71806335449219,True,Image is valid for face recognition
+angles,single_face_test_right30.jpg,True,1,,107.64622688293457,True,Image is valid for face recognition
+angles,single_face_test_left15.jpg,True,1,,106.72116279602051,True,Image is valid for face recognition
+angles,multi_face_test_right15.jpg,True,6,,212.22209930419922,False,Multiple faces detected in the image: 6
+angles,multi_face_test_left15.jpg,True,6,,210.8161449432373,False,Multiple faces detected in the image: 6
+angles,multi_face_test_left30.jpg,True,6,,217.2222137451172,False,Multiple faces detected in the image: 6
+angles,multi_face_test_right30.jpg,True,6,,210.61420440673828,False,Multiple faces detected in the image: 6
+angles,single_face_test_left30.jpg,True,1,,124.59993362426758,True,Image is valid for face recognition
+angles,single_face_test_right15.jpg,True,1,,105.72075843811035,True,Image is valid for face recognition
+expressions,multi_face_test_surprised.jpg,True,6,,211.92598342895508,False,Multiple faces detected in the image: 6
+expressions,single_face_test_sad.jpg,True,1,,104.35295104980469,True,Image is valid for face recognition
+expressions,multi_face_test_sad.jpg,True,6,,210.82711219787598,False,Multiple faces detected in the image: 6
+expressions,multi_face_test_smile.jpg,True,6,,215.9740924835205,False,Multiple faces detected in the image: 6
+expressions,single_face_test_surprised.jpg,True,1,,105.71908950805664,True,Image is valid for face recognition
+expressions,single_face_test_smile.jpg,True,1,,104.54726219177246,True,Image is valid for face recognition
+occlusions,multi_face_test_hat.jpg,True,6,,212.18013763427734,False,Multiple faces detected in the image: 6
+occlusions,single_face_test_shadow.jpg,True,1,,104.38084602355957,True,Image is valid for face recognition
+occlusions,single_face_test_hat.jpg,True,1,,104.03108596801758,False,Face is too small in the image
+occlusions,single_face_test_mask.jpg,True,1,,104.02727127075195,True,Image is valid for face recognition
+occlusions,multi_face_test_shadow.jpg,True,6,,211.61198616027832,False,Multiple faces detected in the image: 6
+occlusions,multi_face_test_sunglasses.jpg,True,5,,211.22002601623535,False,Multiple faces detected in the image: 5
+occlusions,multi_face_test_mask.jpg,True,6,,209.34510231018066,False,Multiple faces detected in the image: 6
+occlusions,single_face_test_sunglasses.jpg,False,0,No faces detected in the image,105.4990291595459,False,No face detected in the image
+backgrounds,single_face_test_white_bg.jpg,True,1,,105.3168773651123,False,Image is too bright (brightness: 246.22)
+backgrounds,single_face_test_green_bg.jpg,True,1,,104.63190078735352,True,Image is valid for face recognition
+backgrounds,multi_face_test_blue_bg.jpg,True,1,,229.83193397521973,False,Image is too dark (brightness: 31.58)
+backgrounds,multi_face_test_white_bg.jpg,True,1,,209.78403091430664,False,Image is too bright (brightness: 252.89)
+backgrounds,multi_face_test_gradient_bg.jpg,True,1,,210.7830047607422,False,Face is too small in the image
+backgrounds,multi_face_test_green_bg.jpg,True,1,,207.4580192565918,False,Face is too small in the image
+backgrounds,single_face_test_noise_bg.jpg,True,1,,105.11016845703125,True,Image is valid for face recognition
+backgrounds,single_face_test_black_bg.jpg,True,1,,100.07333755493164,False,Image is too dark (brightness: 18.01)
+backgrounds,multi_face_test_noise_bg.jpg,True,1,,229.80690002441406,False,Face is too small in the image
+backgrounds,single_face_test_gradient_bg.jpg,True,1,,104.66217994689941,True,Image is valid for face recognition
+backgrounds,multi_face_test_black_bg.jpg,True,1,,200.56986808776855,False,Image is too dark (brightness: 3.19)
+backgrounds,single_face_test_blue_bg.jpg,True,1,,122.81274795532227,False,Image is too dark (brightness: 43.95)

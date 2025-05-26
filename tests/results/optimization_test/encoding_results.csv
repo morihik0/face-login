@@ -1,0 +1,9 @@
+original_success,original_encoding_size,original_time,original_error,optimized_success,optimized_encoding_size,optimized_time,optimized_error,speedup,similarity,image
+True,128,234.06386375427246,,True,128,126.34420394897461,,1.8525888520283964,0.8456057454960691,single_face_test.jpg
+False,0,210.59298515319824,Multiple faces detected in the image: 6,False,0,55.29594421386719,Multiple faces detected in the image: 6,3.8084707322962297,,multi_face_test.jpg
+False,0,0.5958080291748047,Invalid image: Image is too bright (brightness: 200.11),True,128,127.1510124206543,,0.004685830005062721,,single_face_test_bright.jpg
+True,128,213.87076377868652,,True,128,147.17793464660645,,1.4531442114079012,0.8204732957415862,single_face_test_dark.jpg
+True,128,482.7859401702881,,True,128,152.56810188293457,,3.164396320147769,0.8523905754059855,single_face_test_large.jpg
+True,128,59.40580368041992,,True,128,62.59012222290039,,0.9491242638712184,0.8396265774300253,single_face_test_small.jpg
+False,0,106.27579689025879,No face detected in the image,False,0,60.816049575805664,No face detected in the image,1.7474958934612927,,single_face_test_sunglasses.jpg
+False,0,0.38814544677734375,Invalid image: Image is too bright (brightness: 246.22),False,0,2.415180206298828,Invalid image: Image is too bright (brightness: 200.47),0.16071076011846003,,single_face_test_white_bg.jpg

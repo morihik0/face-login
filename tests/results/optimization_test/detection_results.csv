@@ -1,0 +1,9 @@
+original_success,original_face_count,original_time,original_error,optimized_success,optimized_face_count,optimized_time,optimized_error,speedup,image
+True,1,135.82897186279297,,True,1,61.30194664001465,,2.2157366822366296,single_face_test.jpg
+True,6,214.80512619018555,,True,6,55.81784248352051,,3.8483237013971645,multi_face_test.jpg
+True,1,126.05524063110352,,True,1,60.47511100769043,,2.084415200413166,single_face_test_bright.jpg
+True,1,109.45701599121094,,True,1,60.079097747802734,,1.821881820707171,single_face_test_dark.jpg
+True,1,231.14991188049316,,True,1,61.68699264526367,,3.747141852249801,single_face_test_large.jpg
+True,1,26.213884353637695,,True,1,26.685237884521484,,0.9823365437878598,single_face_test_small.jpg
+False,0,106.05382919311523,No faces detected in the image,False,0,61.743974685668945,No faces detected in the image,1.7176385183011356,single_face_test_sunglasses.jpg
+True,1,112.70689964294434,,True,1,61.109066009521484,,1.8443564433693573,single_face_test_white_bg.jpg

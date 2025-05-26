@@ -1,0 +1,9 @@
+category,total,true_positives,false_positives,true_negatives,false_negatives,accuracy
+angles,4.0,4.0,0.0,0.0,0.0,100.0
+backgrounds,6.0,3.0,0.0,0.0,3.0,50.0
+base,2.0,1.0,0.0,0.0,1.0,50.0
+brightness,3.0,2.0,0.0,0.0,1.0,66.66666666666666
+expressions,3.0,3.0,0.0,0.0,0.0,100.0
+occlusions,4.0,2.0,0.0,0.0,2.0,50.0
+quality,2.0,2.0,0.0,0.0,0.0,100.0
+sizes,2.0,2.0,0.0,0.0,0.0,100.0

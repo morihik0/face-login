@@ -1,0 +1,131 @@
+image_name,category,expected_user_id,authenticated_user_id,success,confidence,true_positive,false_negative,false_positive,true_negative,threshold,error
+single_face_test.jpg,base,4,4.0,True,1.0,True,False,False,False,0.4,
+test_face.jpg,base,4,,False,0.0,False,True,False,False,0.4,Invalid image: Invalid image: Image is too dark (brightness: 28.68)
+single_face_test_bright.jpg,brightness,4,,False,0.0,False,True,False,False,0.4,Invalid image: Invalid image: Image is too bright (brightness: 200.11)
+single_face_test_normal.jpg,brightness,4,4.0,True,0.9745384639987942,True,False,False,False,0.4,
+single_face_test_dark.jpg,brightness,4,4.0,True,0.893947349735646,True,False,False,False,0.4,
+single_face_test_small.jpg,sizes,4,4.0,True,0.9136428175884402,True,False,False,False,0.4,
+single_face_test_large.jpg,sizes,4,4.0,True,0.9324070445025658,True,False,False,False,0.4,
+single_face_test_low_quality.jpg,quality,4,4.0,True,0.9106251909079977,True,False,False,False,0.4,
+single_face_test_high_quality.jpg,quality,4,4.0,True,0.9615084718757191,True,False,False,False,0.4,
+single_face_test_right30.jpg,angles,4,4.0,True,0.950022309270097,True,False,False,False,0.4,
+single_face_test_left15.jpg,angles,4,4.0,True,0.9609009114479989,True,False,False,False,0.4,
+single_face_test_left30.jpg,angles,4,4.0,True,0.9542270393133222,True,False,False,False,0.4,
+single_face_test_right15.jpg,angles,4,4.0,True,0.9615140227537234,True,False,False,False,0.4,
+single_face_test_sad.jpg,expressions,4,4.0,True,0.8699096019787682,True,False,False,False,0.4,
+single_face_test_surprised.jpg,expressions,4,,False,0.0,False,True,False,False,0.4,
+single_face_test_smile.jpg,expressions,4,4.0,True,0.7879008644027086,True,False,False,False,0.4,
+single_face_test_shadow.jpg,occlusions,4,4.0,True,0.8901974146159214,True,False,False,False,0.4,
+single_face_test_hat.jpg,occlusions,4,,False,0.0,False,True,False,False,0.4,Invalid image: Invalid image: Face is too small in the image
+single_face_test_mask.jpg,occlusions,4,4.0,True,0.7101935540827415,True,False,False,False,0.4,
+single_face_test_sunglasses.jpg,occlusions,4,,False,0.0,False,True,False,False,0.4,No face detected in the image
+single_face_test_white_bg.jpg,backgrounds,4,,False,0.0,False,True,False,False,0.4,Invalid image: Invalid image: Image is too bright (brightness: 246.22)
+single_face_test_green_bg.jpg,backgrounds,4,4.0,True,0.9092947471186136,True,False,False,False,0.4,
+single_face_test_noise_bg.jpg,backgrounds,4,4.0,True,0.92920201234384,True,False,False,False,0.4,
+single_face_test_black_bg.jpg,backgrounds,4,,False,0.0,False,True,False,False,0.4,Invalid image: Invalid image: Image is too dark (brightness: 18.01)
+single_face_test_gradient_bg.jpg,backgrounds,4,4.0,True,0.9163296904242801,True,False,False,False,0.4,
+single_face_test_blue_bg.jpg,backgrounds,4,,False,0.0,False,True,False,False,0.4,Invalid image: Invalid image: Image is too dark (brightness: 43.95)
+single_face_test.jpg,base,4,4.0,True,1.0,True,False,False,False,0.5,
+test_face.jpg,base,4,,False,0.0,False,True,False,False,0.5,Invalid image: Invalid image: Image is too dark (brightness: 28.68)
+single_face_test_bright.jpg,brightness,4,,False,0.0,False,True,False,False,0.5,Invalid image: Invalid image: Image is too bright (brightness: 200.11)
+single_face_test_normal.jpg,brightness,4,4.0,True,0.9745384639987942,True,False,False,False,0.5,
+single_face_test_dark.jpg,brightness,4,4.0,True,0.893947349735646,True,False,False,False,0.5,
+single_face_test_small.jpg,sizes,4,4.0,True,0.9136428175884402,True,False,False,False,0.5,
+single_face_test_large.jpg,sizes,4,4.0,True,0.9324070445025658,True,False,False,False,0.5,
+single_face_test_low_quality.jpg,quality,4,4.0,True,0.9106251909079977,True,False,False,False,0.5,
+single_face_test_high_quality.jpg,quality,4,4.0,True,0.9615084718757191,True,False,False,False,0.5,
+single_face_test_right30.jpg,angles,4,4.0,True,0.950022309270097,True,False,False,False,0.5,
+single_face_test_left15.jpg,angles,4,4.0,True,0.9609009114479989,True,False,False,False,0.5,
+single_face_test_left30.jpg,angles,4,4.0,True,0.9542270393133222,True,False,False,False,0.5,
+single_face_test_right15.jpg,angles,4,4.0,True,0.9615140227537234,True,False,False,False,0.5,
+single_face_test_sad.jpg,expressions,4,4.0,True,0.8699096019787682,True,False,False,False,0.5,
+single_face_test_surprised.jpg,expressions,4,,False,0.0,False,True,False,False,0.5,
+single_face_test_smile.jpg,expressions,4,4.0,True,0.7879008644027086,True,False,False,False,0.5,
+single_face_test_shadow.jpg,occlusions,4,4.0,True,0.8901974146159214,True,False,False,False,0.5,
+single_face_test_hat.jpg,occlusions,4,,False,0.0,False,True,False,False,0.5,Invalid image: Invalid image: Face is too small in the image
+single_face_test_mask.jpg,occlusions,4,4.0,True,0.7101935540827415,True,False,False,False,0.5,
+single_face_test_sunglasses.jpg,occlusions,4,,False,0.0,False,True,False,False,0.5,No face detected in the image
+single_face_test_white_bg.jpg,backgrounds,4,,False,0.0,False,True,False,False,0.5,Invalid image: Invalid image: Image is too bright (brightness: 246.22)
+single_face_test_green_bg.jpg,backgrounds,4,4.0,True,0.9092947471186136,True,False,False,False,0.5,
+single_face_test_noise_bg.jpg,backgrounds,4,4.0,True,0.92920201234384,True,False,False,False,0.5,
+single_face_test_black_bg.jpg,backgrounds,4,,False,0.0,False,True,False,False,0.5,Invalid image: Invalid image: Image is too dark (brightness: 18.01)
+single_face_test_gradient_bg.jpg,backgrounds,4,4.0,True,0.9163296904242801,True,False,False,False,0.5,
+single_face_test_blue_bg.jpg,backgrounds,4,,False,0.0,False,True,False,False,0.5,Invalid image: Invalid image: Image is too dark (brightness: 43.95)
+single_face_test.jpg,base,4,4.0,True,1.0,True,False,False,False,0.6,
+test_face.jpg,base,4,,False,0.0,False,True,False,False,0.6,Invalid image: Invalid image: Image is too dark (brightness: 28.68)
+single_face_test_bright.jpg,brightness,4,,False,0.0,False,True,False,False,0.6,Invalid image: Invalid image: Image is too bright (brightness: 200.11)
+single_face_test_normal.jpg,brightness,4,4.0,True,0.9745384639987942,True,False,False,False,0.6,
+single_face_test_dark.jpg,brightness,4,4.0,True,0.893947349735646,True,False,False,False,0.6,
+single_face_test_small.jpg,sizes,4,4.0,True,0.9136428175884402,True,False,False,False,0.6,
+single_face_test_large.jpg,sizes,4,4.0,True,0.9324070445025658,True,False,False,False,0.6,
+single_face_test_low_quality.jpg,quality,4,4.0,True,0.9106251909079977,True,False,False,False,0.6,
+single_face_test_high_quality.jpg,quality,4,4.0,True,0.9615084718757191,True,False,False,False,0.6,
+single_face_test_right30.jpg,angles,4,4.0,True,0.950022309270097,True,False,False,False,0.6,
+single_face_test_left15.jpg,angles,4,4.0,True,0.9609009114479989,True,False,False,False,0.6,
+single_face_test_left30.jpg,angles,4,4.0,True,0.9542270393133222,True,False,False,False,0.6,
+single_face_test_right15.jpg,angles,4,4.0,True,0.9615140227537234,True,False,False,False,0.6,
+single_face_test_sad.jpg,expressions,4,4.0,True,0.8699096019787682,True,False,False,False,0.6,
+single_face_test_surprised.jpg,expressions,4,4.0,True,0.44258682091404244,True,False,False,False,0.6,
+single_face_test_smile.jpg,expressions,4,4.0,True,0.7879008644027086,True,False,False,False,0.6,
+single_face_test_shadow.jpg,occlusions,4,4.0,True,0.8901974146159214,True,False,False,False,0.6,
+single_face_test_hat.jpg,occlusions,4,,False,0.0,False,True,False,False,0.6,Invalid image: Invalid image: Face is too small in the image
+single_face_test_mask.jpg,occlusions,4,4.0,True,0.7101935540827415,True,False,False,False,0.6,
+single_face_test_sunglasses.jpg,occlusions,4,,False,0.0,False,True,False,False,0.6,No face detected in the image
+single_face_test_white_bg.jpg,backgrounds,4,,False,0.0,False,True,False,False,0.6,Invalid image: Invalid image: Image is too bright (brightness: 246.22)
+single_face_test_green_bg.jpg,backgrounds,4,4.0,True,0.9092947471186136,True,False,False,False,0.6,
+single_face_test_noise_bg.jpg,backgrounds,4,4.0,True,0.92920201234384,True,False,False,False,0.6,
+single_face_test_black_bg.jpg,backgrounds,4,,False,0.0,False,True,False,False,0.6,Invalid image: Invalid image: Image is too dark (brightness: 18.01)
+single_face_test_gradient_bg.jpg,backgrounds,4,4.0,True,0.9163296904242801,True,False,False,False,0.6,
+single_face_test_blue_bg.jpg,backgrounds,4,,False,0.0,False,True,False,False,0.6,Invalid image: Invalid image: Image is too dark (brightness: 43.95)
+single_face_test.jpg,base,4,4.0,True,1.0,True,False,False,False,0.7,
+test_face.jpg,base,4,,False,0.0,False,True,False,False,0.7,Invalid image: Invalid image: Image is too dark (brightness: 28.68)
+single_face_test_bright.jpg,brightness,4,,False,0.0,False,True,False,False,0.7,Invalid image: Invalid image: Image is too bright (brightness: 200.11)
+single_face_test_normal.jpg,brightness,4,4.0,True,0.9745384639987942,True,False,False,False,0.7,
+single_face_test_dark.jpg,brightness,4,4.0,True,0.893947349735646,True,False,False,False,0.7,
+single_face_test_small.jpg,sizes,4,4.0,True,0.9136428175884402,True,False,False,False,0.7,
+single_face_test_large.jpg,sizes,4,4.0,True,0.9324070445025658,True,False,False,False,0.7,
+single_face_test_low_quality.jpg,quality,4,4.0,True,0.9106251909079977,True,False,False,False,0.7,
+single_face_test_high_quality.jpg,quality,4,4.0,True,0.9615084718757191,True,False,False,False,0.7,
+single_face_test_right30.jpg,angles,4,4.0,True,0.950022309270097,True,False,False,False,0.7,
+single_face_test_left15.jpg,angles,4,4.0,True,0.9609009114479989,True,False,False,False,0.7,
+single_face_test_left30.jpg,angles,4,4.0,True,0.9542270393133222,True,False,False,False,0.7,
+single_face_test_right15.jpg,angles,4,4.0,True,0.9615140227537234,True,False,False,False,0.7,
+single_face_test_sad.jpg,expressions,4,4.0,True,0.8699096019787682,True,False,False,False,0.7,
+single_face_test_surprised.jpg,expressions,4,4.0,True,0.44258682091404244,True,False,False,False,0.7,
+single_face_test_smile.jpg,expressions,4,4.0,True,0.7879008644027086,True,False,False,False,0.7,
+single_face_test_shadow.jpg,occlusions,4,4.0,True,0.8901974146159214,True,False,False,False,0.7,
+single_face_test_hat.jpg,occlusions,4,,False,0.0,False,True,False,False,0.7,Invalid image: Invalid image: Face is too small in the image
+single_face_test_mask.jpg,occlusions,4,4.0,True,0.7101935540827415,True,False,False,False,0.7,
+single_face_test_sunglasses.jpg,occlusions,4,,False,0.0,False,True,False,False,0.7,No face detected in the image
+single_face_test_white_bg.jpg,backgrounds,4,,False,0.0,False,True,False,False,0.7,Invalid image: Invalid image: Image is too bright (brightness: 246.22)
+single_face_test_green_bg.jpg,backgrounds,4,4.0,True,0.9092947471186136,True,False,False,False,0.7,
+single_face_test_noise_bg.jpg,backgrounds,4,4.0,True,0.92920201234384,True,False,False,False,0.7,
+single_face_test_black_bg.jpg,backgrounds,4,,False,0.0,False,True,False,False,0.7,Invalid image: Invalid image: Image is too dark (brightness: 18.01)
+single_face_test_gradient_bg.jpg,backgrounds,4,4.0,True,0.9163296904242801,True,False,False,False,0.7,
+single_face_test_blue_bg.jpg,backgrounds,4,,False,0.0,False,True,False,False,0.7,Invalid image: Invalid image: Image is too dark (brightness: 43.95)
+single_face_test.jpg,base,4,4.0,True,1.0,True,False,False,False,0.8,
+test_face.jpg,base,4,,False,0.0,False,True,False,False,0.8,Invalid image: Invalid image: Image is too dark (brightness: 28.68)
+single_face_test_bright.jpg,brightness,4,,False,0.0,False,True,False,False,0.8,Invalid image: Invalid image: Image is too bright (brightness: 200.11)
+single_face_test_normal.jpg,brightness,4,4.0,True,0.9745384639987942,True,False,False,False,0.8,
+single_face_test_dark.jpg,brightness,4,4.0,True,0.893947349735646,True,False,False,False,0.8,
+single_face_test_small.jpg,sizes,4,4.0,True,0.9136428175884402,True,False,False,False,0.8,
+single_face_test_large.jpg,sizes,4,4.0,True,0.9324070445025658,True,False,False,False,0.8,
+single_face_test_low_quality.jpg,quality,4,4.0,True,0.9106251909079977,True,False,False,False,0.8,
+single_face_test_high_quality.jpg,quality,4,4.0,True,0.9615084718757191,True,False,False,False,0.8,
+single_face_test_right30.jpg,angles,4,4.0,True,0.950022309270097,True,False,False,False,0.8,
+single_face_test_left15.jpg,angles,4,4.0,True,0.9609009114479989,True,False,False,False,0.8,
+single_face_test_left30.jpg,angles,4,4.0,True,0.9542270393133222,True,False,False,False,0.8,
+single_face_test_right15.jpg,angles,4,4.0,True,0.9615140227537234,True,False,False,False,0.8,
+single_face_test_sad.jpg,expressions,4,4.0,True,0.8699096019787682,True,False,False,False,0.8,
+single_face_test_surprised.jpg,expressions,4,4.0,True,0.44258682091404244,True,False,False,False,0.8,
+single_face_test_smile.jpg,expressions,4,4.0,True,0.7879008644027086,True,False,False,False,0.8,
+single_face_test_shadow.jpg,occlusions,4,4.0,True,0.8901974146159214,True,False,False,False,0.8,
+single_face_test_hat.jpg,occlusions,4,,False,0.0,False,True,False,False,0.8,Invalid image: Invalid image: Face is too small in the image
+single_face_test_mask.jpg,occlusions,4,4.0,True,0.7101935540827415,True,False,False,False,0.8,
+single_face_test_sunglasses.jpg,occlusions,4,,False,0.0,False,True,False,False,0.8,No face detected in the image
+single_face_test_white_bg.jpg,backgrounds,4,,False,0.0,False,True,False,False,0.8,Invalid image: Invalid image: Image is too bright (brightness: 246.22)
+single_face_test_green_bg.jpg,backgrounds,4,4.0,True,0.9092947471186136,True,False,False,False,0.8,
+single_face_test_noise_bg.jpg,backgrounds,4,4.0,True,0.92920201234384,True,False,False,False,0.8,
+single_face_test_black_bg.jpg,backgrounds,4,,False,0.0,False,True,False,False,0.8,Invalid image: Invalid image: Image is too dark (brightness: 18.01)
+single_face_test_gradient_bg.jpg,backgrounds,4,4.0,True,0.9163296904242801,True,False,False,False,0.8,
+single_face_test_blue_bg.jpg,backgrounds,4,,False,0.0,False,True,False,False,0.8,Invalid image: Invalid image: Image is too dark (brightness: 43.95)

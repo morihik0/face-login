@@ -1,0 +1,7 @@
+characteristic,error_type,count
+black_bg,false_negative,1
+blue_bg,false_negative,1
+bright,false_negative,1
+hat,false_negative,1
+sunglasses,false_negative,1
+white_bg,false_negative,1

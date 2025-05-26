@@ -1,0 +1,2 @@
+original_detect_time,original_encoding_time,original_auth_time,optimized_detect_time,optimized_encoding_time,optimized_auth_time,original_detect_success,original_encoding_success,original_auth_success,optimized_detect_success,optimized_encoding_success,optimized_auth_success,detect_speedup,encoding_speedup,auth_speedup
+173.8828718662262,199.26786422729492,203.59593629837036,61.911553144454956,100.04505515098572,124.2428869009018,100.0,43.75,43.75,100.0,50.0,0.0,2.8664151045587043,2.2853052305629014,2.345645322652569
