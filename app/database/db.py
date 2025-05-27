@@ -20,7 +20,11 @@ def get_db_connection():
     try:
         # Ensure the directory exists
         db_path = DATABASE['path']
-        os.makedirs(os.path.dirname(db_path), exist_ok=True)
+        db_dir = os.path.dirname(db_path)
+        
+        # Only create directory if it's not empty and doesn't exist
+        if db_dir and not os.path.exists(db_dir):
+            os.makedirs(db_dir, exist_ok=True)
         
         # Connect to the database with row factory for dictionary-like rows
         conn = sqlite3.connect(db_path)

@@ -59,6 +59,7 @@ class User:
             
             # Get the ID of the inserted user
             user_id = cursor.lastrowid
+            logger.info(f"User created with ID: {user_id}")
             
             # Fetch the created user
             cursor.execute("SELECT * FROM users WHERE id = ?", (user_id,))
@@ -66,14 +67,18 @@ class User:
             conn.close()
             
             if user_data:
-                return cls(
+                user_obj = cls(
                     id=user_data['id'],
                     name=user_data['name'],
                     email=user_data['email'],
                     created_at=user_data['created_at'],
                     is_active=bool(user_data['is_active'])
                 )
-            return None
+                logger.info(f"User object created: {type(user_obj)} with ID: {user_obj.id}")
+                return user_obj
+            else:
+                logger.error(f"No user data found for ID: {user_id}")
+                return None
         except sqlite3.Error as e:
             logger.error(f"Error creating user: {e}")
             if conn:

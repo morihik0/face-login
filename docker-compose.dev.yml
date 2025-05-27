@@ -1,0 +1,56 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: face-login-backend-dev
+    ports:
+      - "5001:5001"
+    volumes:
+      - ./app:/app/app
+      - ./run.py:/app/run.py
+      - ./face_images:/app/face_images
+      - ./face_login.db:/app/face_login.db
+      - ./logs:/app/logs
+    environment:
+      - FLASK_ENV=development
+      - FLASK_DEBUG=1
+      - DB_PATH=/app/face_login.db
+      - FACE_IMAGES_DIR=/app/face_images
+      - LOG_FILE=/app/logs/face_login.log
+      - FACE_RECOGNITION_THRESHOLD=0.6
+      - MAX_FACES_PER_USER=5
+    networks:
+      - face-login-network
+    restart: unless-stopped
+    command: python run.py
+
+  frontend:
+    image: node:16-alpine
+    container_name: face-login-frontend-dev
+    working_dir: /app
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+      - REACT_APP_API_URL=http://localhost:5001
+    networks:
+      - face-login-network
+    command: npm start
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+networks:
+  face-login-network:
+    driver: bridge
+
+volumes:
+  face_images:
+  logs:
+  node_modules:

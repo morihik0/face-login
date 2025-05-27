@@ -79,3 +79,19 @@ htmlcov/
 # Test images
 tests/test_images/
 *_result.jpg
+
+# Frontend / React specific
+frontend/node_modules/
+frontend/build/
+frontend/.env.local
+frontend/.env.development.local
+frontend/.env.test.local
+frontend/.env.production.local
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+frontend/.eslintcache
+frontend/.parcel-cache
+
+# Face images directory
+face_images/

@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: face-login-backend
+    ports:
+      - "5001:5001"
+    volumes:
+      - ./face_images:/app/face_images
+      - ./face_login.db:/app/face_login.db
+      - ./logs:/app/logs
+    environment:
+      - FLASK_ENV=production
+      - DB_PATH=/app/face_login.db
+      - FACE_IMAGES_DIR=/app/face_images
+      - LOG_FILE=/app/logs/face_login.log
+      - FACE_RECOGNITION_THRESHOLD=0.6
+      - MAX_FACES_PER_USER=5
+    networks:
+      - face-login-network
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: face-login-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - face-login-network
+    restart: unless-stopped
+
+networks:
+  face-login-network:
+    driver: bridge
+
+volumes:
+  face_images:
+  logs:

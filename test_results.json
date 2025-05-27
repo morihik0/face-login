@@ -1,0 +1,78 @@
+{
+  "passed": 12,
+  "failed": 0,
+  "tests": [
+    {
+      "name": "Get all users",
+      "endpoint": "/users",
+      "status": 200,
+      "success": true
+    },
+    {
+      "name": "Create new user",
+      "endpoint": "/users",
+      "status": 201,
+      "success": true
+    },
+    {
+      "name": "Get user 10",
+      "endpoint": "/users/10",
+      "status": 200,
+      "success": true
+    },
+    {
+      "name": "Update user 10",
+      "endpoint": "/users/10",
+      "status": 200,
+      "success": true
+    },
+    {
+      "name": "Register face",
+      "endpoint": "/recognition/register",
+      "status": 201,
+      "success": true
+    },
+    {
+      "name": "Authenticate face",
+      "endpoint": "/recognition/authenticate",
+      "status": 200,
+      "success": true
+    },
+    {
+      "name": "Get auth history",
+      "endpoint": "/recognition/history?limit=5",
+      "status": 200,
+      "success": true
+    },
+    {
+      "name": "Get user 10 auth history",
+      "endpoint": "/recognition/history?user_id=10",
+      "status": 200,
+      "success": true
+    },
+    {
+      "name": "Delete user 10",
+      "endpoint": "/users/10",
+      "status": 200,
+      "success": true
+    },
+    {
+      "name": "Get non-existent user",
+      "endpoint": "/users/99999",
+      "status": 404,
+      "success": true
+    },
+    {
+      "name": "Create duplicate user",
+      "endpoint": "/users",
+      "status": 409,
+      "success": true
+    },
+    {
+      "name": "Authenticate without image",
+      "endpoint": "/recognition/authenticate",
+      "status": 400,
+      "success": true
+    }
+  ]
+}

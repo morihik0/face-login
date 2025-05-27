@@ -7,6 +7,9 @@ import logging
 from logging.handlers import RotatingFileHandler
 from flask import Flask, jsonify
 from flask_cors import CORS
+from flask_jwt_extended import JWTManager
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
 from app.config import API, LOGGING
 from app.database.db import init_db
 
@@ -28,8 +31,11 @@ def create_app(test_config=None):
     
     # Load default configuration
     app.config.from_mapping(
-        SECRET_KEY=os.environ.get('SECRET_KEY', 'dev'),
+        SECRET_KEY=os.environ.get('SECRET_KEY', 'dev-secret-key-change-in-production'),
         DATABASE=os.path.join(app.instance_path, 'face_login.db'),
+        JWT_SECRET_KEY=os.environ.get('JWT_SECRET_KEY', 'jwt-secret-key-change-in-production'),
+        JWT_ACCESS_TOKEN_EXPIRES=3600,  # 1 hour
+        JWT_REFRESH_TOKEN_EXPIRES=2592000,  # 30 days
     )
     
     # Load test config if provided, otherwise load from environment variables
@@ -38,6 +44,17 @@ def create_app(test_config=None):
     
     # Configure CORS
     CORS(app, resources={r"/api/*": {"origins": API['cors_origins']}})
+    
+    # Configure JWT
+    jwt = JWTManager(app)
+    
+    # Configure rate limiting
+    limiter = Limiter(
+        app=app,
+        key_func=get_remote_address,
+        default_limits=["200 per day", "50 per hour"],
+        storage_uri="memory://"
+    )
     
     # Configure logging
     configure_logging(app)
@@ -60,6 +77,31 @@ def create_app(test_config=None):
             "message": "Face Login API is running",
             "version": "1.0.0"
         })
+    
+    # JWT error handlers
+    @jwt.expired_token_loader
+    def expired_token_callback(jwt_header, jwt_payload):
+        return jsonify({
+            "status": "error",
+            "message": "Token has expired",
+            "error": "token_expired"
+        }), 401
+    
+    @jwt.invalid_token_loader
+    def invalid_token_callback(error):
+        return jsonify({
+            "status": "error",
+            "message": "Invalid token",
+            "error": "invalid_token"
+        }), 401
+    
+    @jwt.unauthorized_loader
+    def missing_token_callback(error):
+        return jsonify({
+            "status": "error",
+            "message": "Authorization required",
+            "error": "authorization_required"
+        }), 401
     
     logger.info("Flask application initialized successfully")
     return app
@@ -157,9 +199,11 @@ def register_blueprints(app):
         app (Flask): The Flask application instance.
     """
     # Import blueprints
-    from app.api import users_bp, recognition_bp
+    from app.api import users_bp, recognition_bp, auth_bp, public_bp
     
     # Register blueprints
+    app.register_blueprint(public_bp, url_prefix='/api/public')
+    app.register_blueprint(auth_bp, url_prefix='/api/auth')
     app.register_blueprint(users_bp, url_prefix='/api/users')
     app.register_blueprint(recognition_bp, url_prefix='/api/recognition')
     
