@@ -16,16 +16,28 @@ A modern web-based facial recognition authentication system built with Flask (ba
 
 ```
 FaceLogin/
-├── Backend (Flask API)
-│   ├── app/                    # Application code
-│   ├── tests/                  # Test suite
-│   ├── face_images/           # Stored face images
-│   └── run.py                 # Entry point
-│
-└── Frontend (React)
-    ├── public/                # Static files
-    ├── src/                   # React components
-    └── package.json          # Dependencies
+├── app/                       # Backend Flask application
+│   ├── api/                   # API routes
+│   ├── database/              # Database models and connection
+│   └── services/              # Business logic services
+├── frontend/                  # React frontend application
+│   ├── public/                # Static files
+│   ├── src/                   # React components and pages
+│   └── package.json          # Frontend dependencies
+├── tests/                     # Unit tests
+├── test_tools/               # Testing and analysis tools
+│   ├── test_*.py             # API and system tests
+│   ├── analyze_*.py          # Performance analysis
+│   ├── generate_*.py         # Test data generation
+│   └── test_browser.html     # Browser-based testing
+├── docs/                     # Documentation
+│   ├── implementation_plan.md
+│   ├── DOCKER_GUIDE.md
+│   ├── SECURITY_IMPLEMENTATION.md
+│   └── other documentation files
+├── face_images/              # Stored face images
+├── docker-compose.yml        # Docker configuration
+└── run.py                    # Backend entry point
 ```
 
 ## 🚀 Quick Start
@@ -206,6 +218,75 @@ pytest tests/test_face_detection.py
 3. **Face not detected**
    - Ensure good lighting
    - Face camera directly
+   - Remove glasses/masks if needed
+
+## 🧪 Testing Tools
+
+The `test_tools/` directory contains comprehensive testing and analysis tools:
+
+### API Testing
+- `test_api_endpoints.py` - Complete API endpoint testing
+- `test_api_simple.py` - Basic API functionality tests
+- `test_full_system.py` - End-to-end system testing
+- `test_jwt_auth.py` - JWT authentication testing
+- `test_browser.html` - Browser-based interactive testing
+
+### Performance Analysis
+- `analyze_face_detection_rate.py` - Face detection accuracy analysis
+- `analyze_false_authentication_rate.py` - Authentication error analysis
+- `measure_performance.py` - System performance benchmarking
+- `optimize_face_recognition.py` - Performance optimization tools
+
+### Test Data Generation
+- `generate_test_images.py` - Generate test face images
+- `generate_expression_images.py` - Create expression variations
+- `generate_occlusion_images.py` - Create occlusion test cases
+- `generate_background_images.py` - Generate background variations
+
+### Visualization
+- `visualize_test_results.py` - Create performance charts
+- `test_results_visualization.png` - Visual test results
+- `api_test_results.png` - API testing results
+
+## 📚 Documentation
+
+The `docs/` directory contains detailed documentation:
+
+### Implementation Guides
+- `implementation_plan.md` - Original implementation plan
+- `face_detection_service_plan.md` - Face detection service design
+- `face_recognition_libraries_plan.md` - Library selection rationale
+
+### System Documentation
+- `FINAL_PROJECT_SUMMARY.md` - Complete project overview
+- `PROJECT_STATUS.md` - Current system status
+- `SECURITY_IMPLEMENTATION.md` - Security features and considerations
+- `TEST_SUMMARY.md` - Testing methodology and results
+
+### Setup Guides
+- `DOCKER_GUIDE.md` - Docker deployment instructions
+- `api_implementation_report.md` - API implementation details
+- `task_list.md` - Development task tracking
+
+## 🚀 Usage Examples
+
+### Running Tests
+```bash
+# Run all API tests
+python test_tools/test_api_endpoints.py
+
+# Analyze face detection performance
+python test_tools/analyze_face_detection_rate.py
+
+# Generate test data
+python test_tools/generate_test_images.py
+
+# Visualize results
+python test_tools/visualize_test_results.py
+```
+
+### Browser Testing
+Open `test_tools/test_browser.html` in your browser for interactive testing of all API endpoints with a user-friendly interface.
    - Remove obstructions
 
 4. **Low authentication confidence**
