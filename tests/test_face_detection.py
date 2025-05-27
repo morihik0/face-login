@@ -1,9 +1,15 @@
 """
 Tests for the face detection service.
 """
+import os
+import sys
 import unittest
 import cv2
 import numpy as np
+
+# Add the parent directory to the path so we can import the app modules
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 import app.services.face_detection
 from app.services.face_detection import (
     detect_faces,

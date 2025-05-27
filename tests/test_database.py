@@ -18,11 +18,6 @@ logging.basicConfig(
 from app.database.db import init_db, test_connection, get_db_connection
 from app.database.models import User, FaceEncoding, AuthLog
 
-# Configure logging
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-)
 logger = logging.getLogger(__name__)
 
 def test_db_initialization():

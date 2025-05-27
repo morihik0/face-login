@@ -43,41 +43,6 @@ class AuthService:
         }
     
     @staticmethod
-    def authenticate_user(email, password=None):
-        """
-        Authenticate a user by email and password.
-        
-        Args:
-            email (str): User's email.
-            password (str, optional): User's password (for future use).
-            
-        Returns:
-            User: The authenticated user object or None.
-        """
-        try:
-            user = User.get_by_email(email)
-            
-            if not user:
-                logger.warning(f"Authentication failed: User not found with email {email}")
-                return None
-            
-            if not user.is_active:
-                logger.warning(f"Authentication failed: User {user.id} is inactive")
-                return None
-            
-            # For now, we're using face authentication only
-            # In the future, password authentication can be added here
-            # if password and not check_password_hash(user.password_hash, password):
-            #     return None
-            
-            logger.info(f"User {user.id} authenticated successfully")
-            return user
-            
-        except Exception as e:
-            logger.error(f"Error during authentication: {e}")
-            return None
-    
-    @staticmethod
     def get_current_user():
         """
         Get the current authenticated user from JWT token.
@@ -123,22 +88,3 @@ class AuthService:
         except Exception as e:
             logger.error(f"Error validating token user: {e}")
             return False
-
-# Rate limiting configurations
-RATE_LIMIT_RULES = {
-    'authentication': '5 per minute',
-    'registration': '10 per hour',
-    'api_default': '100 per minute'
-}
-
-def get_rate_limit(endpoint_type='api_default'):
-    """
-    Get rate limit for specific endpoint type.
-    
-    Args:
-        endpoint_type (str): Type of endpoint.
-        
-    Returns:
-        str: Rate limit string.
-    """
-    return RATE_LIMIT_RULES.get(endpoint_type, RATE_LIMIT_RULES['api_default'])

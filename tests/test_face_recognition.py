@@ -1,12 +1,17 @@
 """
 Tests for the face recognition service.
 """
+import os
+import sys
 import unittest
 import numpy as np
 from unittest.mock import patch, MagicMock
+
+# Add the parent directory to the path so we can import the app modules
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from app.services.face_recognition import (
     get_user_encodings, compare_faces, get_recognition_threshold,
-    set_recognition_threshold, register_face, authenticate_face
+    register_face, authenticate_face
 )
 from app.services.face_detection import FaceDetectionError, MultipleFacesError, ImageQualityError
 from app.database.models import User, FaceEncoding
@@ -157,38 +162,6 @@ class TestFaceRecognitionService(unittest.TestCase):
         
         # Assertions
         self.assertEqual(threshold, 0.6)
-    
-    @patch('app.services.face_recognition.FACE_RECOGNITION', {'threshold': 0.6})
-    def test_set_recognition_threshold_valid(self):
-        """Test setting a valid recognition threshold."""
-        # Call the function
-        new_threshold = set_recognition_threshold(0.7)
-        
-        # Assertions
-        self.assertEqual(new_threshold, 0.7)
-        self.assertEqual(get_recognition_threshold(), 0.7)
-    
-    def test_set_recognition_threshold_invalid_type(self):
-        """Test setting an invalid type for recognition threshold."""
-        # Call the function with invalid type
-        with self.assertRaises(ValueError) as context:
-            set_recognition_threshold("invalid")
-        
-        self.assertIn("must be a number", str(context.exception))
-    
-    def test_set_recognition_threshold_out_of_range(self):
-        """Test setting an out of range value for recognition threshold."""
-        # Call the function with value < 0
-        with self.assertRaises(ValueError) as context:
-            set_recognition_threshold(-0.1)
-        
-        self.assertIn("must be between 0.0 and 1.0", str(context.exception))
-        
-        # Call the function with value > 1
-        with self.assertRaises(ValueError) as context:
-            set_recognition_threshold(1.1)
-        
-        self.assertIn("must be between 0.0 and 1.0", str(context.exception))
     
     @patch('app.services.face_recognition.get_recognition_threshold')
     @patch('app.services.face_recognition.face_recognition.compare_faces')
@@ -343,7 +316,12 @@ class TestFaceRecognitionService(unittest.TestCase):
         mock_get_encodings.side_effect = lambda user_id: [np.array([0.1, 0.2, 0.3])] if user_id == 1 else []
         
         # Mock face comparison - match with user 1
-        mock_compare_faces.side_effect = lambda encodings, encoding, tolerance: (True, 0, 0.9) if encodings == [np.array([0.1, 0.2, 0.3])] else (False, -1, 0.0)
+        def mock_compare_side_effect(encodings, encoding, tolerance):
+            if len(encodings) > 0 and np.array_equal(encodings[0], np.array([0.1, 0.2, 0.3])):
+                return (True, 0, 0.9)
+            return (False, -1, 0.0)
+        
+        mock_compare_faces.side_effect = mock_compare_side_effect
         
         # Call the function
         image = np.zeros((100, 100, 3), dtype=np.uint8)  # Dummy image

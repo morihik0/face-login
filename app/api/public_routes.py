@@ -9,6 +9,7 @@ from app.api import public_bp
 from app.database.models import User
 from app.services.face_recognition import register_face
 from app.services.auth import AuthService
+from app.utils import create_error_response, create_success_response, validate_request_data
 import logging
 
 # Configure logger
@@ -32,44 +33,27 @@ def register_user_with_face():
     logger.info("Public user registration with face request")
     
     try:
-        # Get request data
+        # Get and validate request data
         data = request.get_json()
+        is_valid, missing_fields = validate_request_data(data, ['name', 'email', 'image'])
         
-        if not data:
-            return jsonify({
-                "status": "error",
-                "message": "No data provided",
-                "data": None
-            }), 400
+        if not is_valid:
+            if missing_fields == ["No data provided"]:
+                return create_error_response("No data provided")
+            return create_error_response(f"Missing required fields: {', '.join(missing_fields)}")
         
-        # Validate required fields
         name = data.get('name')
         email = data.get('email')
         image_data = data.get('image')
         
-        if not all([name, email, image_data]):
-            return jsonify({
-                "status": "error",
-                "message": "name, email, and image are required",
-                "data": None
-            }), 400
-        
         # Validate email format
         if '@' not in email or '.' not in email:
-            return jsonify({
-                "status": "error",
-                "message": "Invalid email format",
-                "data": None
-            }), 400
+            return create_error_response("Invalid email format")
         
         # Check if email already exists
         existing_user = User.get_by_email(email)
         if existing_user:
-            return jsonify({
-                "status": "error",
-                "message": "User with this email already exists",
-                "data": None
-            }), 409
+            return create_error_response("User with this email already exists", 409)
         
         # Decode and validate image
         try:
@@ -82,11 +66,7 @@ def register_user_with_face():
                 
         except Exception as e:
             logger.error(f"Error decoding image: {e}")
-            return jsonify({
-                "status": "error",
-                "message": "Invalid image data",
-                "data": None
-            }), 400
+            return create_error_response("Invalid image data")
         
         # Create new user
         try:
@@ -96,11 +76,7 @@ def register_user_with_face():
             logger.info(f"Created new user: {user.id}")
         except Exception as e:
             logger.error(f"Error creating user: {e}")
-            return jsonify({
-                "status": "error",
-                "message": "Failed to create user",
-                "error": str(e)
-            }), 500
+            return create_error_response("Failed to create user", 500, str(e))
         
         # Register face for the new user
         try:
@@ -116,41 +92,30 @@ def register_user_with_face():
                 logger.error(f"Error deleting user after face registration failure: {delete_error}")
             
             logger.error(f"Error registering face: {e}")
-            return jsonify({
-                "status": "error",
-                "message": "Failed to register face",
-                "error": str(e)
-            }), 400
+            return create_error_response("Failed to register face", 400, str(e))
         
         # Generate JWT tokens for immediate login
         tokens = AuthService.generate_tokens(user.id)
         
-        return jsonify({
-            "status": "success",
-            "message": "User registered successfully with face authentication",
-            "data": {
-                "user": {
-                    "id": user.id,
-                    "name": user.name,
-                    "email": user.email,
-                    "created_at": user.created_at,
-                    "is_active": user.is_active
-                },
-                "face_registration": {
-                    "image_path": face_encoding_obj.image_path,
-                    "face_count": 1
-                },
-                **tokens
-            }
-        }), 201
+        response_data = {
+            "user": {
+                "id": user.id,
+                "name": user.name,
+                "email": user.email,
+                "created_at": user.created_at,
+                "is_active": user.is_active
+            },
+            "face_registration": {
+                "image_path": face_encoding_obj.image_path,
+                "face_count": 1
+            },
+            **tokens
+        }
+        return create_success_response("User registered successfully with face authentication", response_data, 201)
         
     except Exception as e:
         logger.error(f"Error during user registration: {e}")
-        return jsonify({
-            "status": "error",
-            "message": "Registration failed",
-            "error": str(e)
-        }), 500
+        return create_error_response("Registration failed", 500, str(e))
 
 @public_bp.route('/check-email', methods=['POST'])
 def check_email():
@@ -167,30 +132,22 @@ def check_email():
     """
     try:
         data = request.get_json()
+        is_valid, missing_fields = validate_request_data(data, ['email'])
         
-        if not data or not data.get('email'):
-            return jsonify({
-                "status": "error",
-                "message": "Email is required",
-                "data": None
-            }), 400
+        if not is_valid:
+            if missing_fields == ["No data provided"]:
+                return create_error_response("No data provided")
+            return create_error_response("Email is required")
         
         email = data.get('email')
         existing_user = User.get_by_email(email)
         
-        return jsonify({
-            "status": "success",
-            "message": "Email check completed",
-            "data": {
-                "email": email,
-                "available": existing_user is None
-            }
-        })
+        response_data = {
+            "email": email,
+            "available": existing_user is None
+        }
+        return create_success_response("Email check completed", response_data)
         
     except Exception as e:
         logger.error(f"Error checking email: {e}")
-        return jsonify({
-            "status": "error",
-            "message": "Email check failed",
-            "error": str(e)
-        }), 500
+        return create_error_response("Email check failed", 500, str(e))

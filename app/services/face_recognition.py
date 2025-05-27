@@ -63,33 +63,6 @@ def get_recognition_threshold():
     """
     return FACE_RECOGNITION['threshold']
 
-def set_recognition_threshold(value):
-    """
-    Set the face recognition threshold value.
-    
-    Args:
-        value (float): The new threshold value. Must be between 0.0 and 1.0.
-        
-    Returns:
-        float: The updated threshold value.
-        
-    Raises:
-        ValueError: If the value is not between 0.0 and 1.0.
-    """
-    if not isinstance(value, (int, float)):
-        logger.error(f"Invalid threshold value type: {type(value)}")
-        raise ValueError("Threshold value must be a number")
-    
-    if value < 0.0 or value > 1.0:
-        logger.error(f"Invalid threshold value: {value}")
-        raise ValueError("Threshold value must be between 0.0 and 1.0")
-    
-    # Update the threshold in the config
-    FACE_RECOGNITION['threshold'] = float(value)
-    logger.info(f"Face recognition threshold updated to: {value}")
-    
-    return FACE_RECOGNITION['threshold']
-
 def compare_faces(known_encodings, face_encoding, tolerance=None):
     """
     Compare a face encoding against a list of known face encodings.

@@ -385,32 +385,6 @@ class FaceEncoding:
                 conn.close()
             return 0
     
-    def delete(self):
-        """
-        Delete the face encoding from the database.
-        
-        Returns:
-            bool: True if successful, False otherwise.
-        """
-        if not self.id:
-            logger.error("Cannot delete face encoding without ID")
-            return False
-        
-        try:
-            conn = get_db_connection()
-            cursor = conn.cursor()
-            
-            cursor.execute("DELETE FROM face_encodings WHERE id = ?", (self.id,))
-            conn.commit()
-            conn.close()
-            
-            return True
-        except sqlite3.Error as e:
-            logger.error(f"Error deleting face encoding: {e}")
-            if conn:
-                conn.rollback()
-                conn.close()
-            return False
 
 
 class AuthLog:

@@ -12,6 +12,7 @@ from app.database.models import User, FaceEncoding, AuthLog
 from app.services.face_recognition import register_face, authenticate_face
 from app.services.auth import AuthService
 from app.config import STORAGE
+from app.utils import create_error_response, create_success_response, validate_request_data
 import logging
 
 # Configure logger
